@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Combos - Snack Bazaar</title>
+      <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+      <header>
+        <div class="container">
+          <div class="logo">Snack Bazaar</div>
+          <nav>
+            <ul>
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/dashboard/products">Products</a></li>
+              <li><a href="/dashboard/track-order">Track Order</a></li>
+              <li><a href="/dashboard/contact-us">Contact Us</a></li>
+              <li><a href="/dashboard/profile">Profile</a></li>
+              <li><a href="/dashboard/order-history">Order History</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="combos">
+          <div class="container">
+            <h2>Combos</h2>
+            <div class="combos-grid">
+              <% if (combos && combos.length > 0) { %>
+                <% combos.forEach(combo => { %>
+                  <div class="combo-card">
+                    <img src="<%= combo.image %>" alt="<%= combo.name %>">
+                    <h3><%= combo.name %></h3>
+                    <p><%= combo.description %></p>
+                    <p>Price: ₹<%= combo.price %></p>
+                    <ul>
+                      <% combo.snacks.forEach(snack => { %>
+                        <li><%= snack.title %></li>
+                      <% }); %>
+                    </ul>
+                    <button>Add to Cart</button>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <p>No combos available.</p>
+              <% } %>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 Snack Bazaar</p>
+        </div>
+      </footer>
+    </body>
+    </html>

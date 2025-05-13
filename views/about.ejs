@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>About Us - Snack Bazaar</title>
+      <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+      <header>
+        <div class="container">
+          <div class="logo">Snack Bazaar</div>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/testimonials">Testimonials</a></li>
+              <% if (user) { %>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/cart">Cart</a></li>
+              <% } else { %>
+                <li><a href="/signup">Signup</a></li>
+                <li><a href="/login">Login</a></li>
+              <% } %>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="about">
+          <div class="container">
+            <h2>About Snack Bazaar</h2>
+            <p>We are passionate about snacks and providing the best experience.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 Snack Bazaar</p>
+        </div>
+      </footer>
+    </body>
+    </html>

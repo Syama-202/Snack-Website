@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Snack Bazaar</title>
+      <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+      <header>
+        <div class="container">
+          <div class="logo">Snack Bazaar</div>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/testimonials">Testimonials</a></li>
+              <% if (user) { %>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/cart">Cart</a></li>
+              <% } else { %>
+                <li><a href="/signup">Signup</a></li>
+                <li><a href="/login">Login</a></li>
+              <% } %>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="hero">
+          <div class="container">
+            <h1>Welcome to Snack Bazaar</h1>
+            <p>Your one-stop shop for delicious snacks!</p>
+          </div>
+        </section>
+
+        <section id="featured-snacks">
+          <div class="container">
+            <h2>Featured Snacks</h2>
+            <div class="snacks-grid">
+              <!-- Snack items will go here -->
+              <% if (snacks && snacks.length > 0) { %>
+                <% snacks.forEach(snack => { %>
+                  <div class="snack-card">
+                    <% if (snack.badge) { %>
+                      <span class="snack-badge"><%= snack.badge %></span>
+                    <% } %>
+                    <img src="<%= snack.image %>" alt="<%= snack.title %>">
+                    <h4><%= snack.title %></h4>
+                    <p>₹<%= snack.price %></p>
+                    <p><%= snack.description %></p>
+                    <% if (user) { %>
+                      <form action="/cart/add/<%= snack._id %>" method="POST">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit">Add to Cart</button>
+                      </form>
+                    <% } else { %>
+                      <a href="/login">Login to Add to Cart</a>
+                    <% } %>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <p>No snacks available at the moment.</p>
+              <% } %>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 Snack Bazaar</p>
+        </div>
+      </footer>
+    </body>
+    </html>

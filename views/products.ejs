@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Products - Snack Bazaar</title>
+      <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+      <header>
+        <div class="container">
+          <div class="logo">Snack Bazaar</div>
+          <nav>
+            <ul>
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/dashboard/products">Products</a></li>
+              <li><a href="/dashboard/track-order">Track Order</a></li>
+              <li><a href="/dashboard/contact-us">Contact Us</a></li>
+              <li><a href="/dashboard/profile">Profile</a></li>
+              <li><a href="/dashboard/order-history">Order History</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="products">
+          <div class="container">
+            <h2>Products</h2>
+            <div class="search-bar">
+              <input type="text" placeholder="Search snacks...">
+              <button>Search</button>
+            </div>
+            <div class="category-filters">
+              <button>All Snacks</button>
+              <button>Fried Snacks</button>
+              <button>Baked Snacks</button>
+              <button>Namkeen</button>
+              <button>Sweet Snacks</button>
+              <button>Street Food</button>
+              <button>Build Your Combo</button>
+            </div>
+            <div class="snacks-grid">
+              <% if (snacks && snacks.length > 0) { %>
+                <% snacks.forEach(snack => { %>
+                  <div class="snack-card">
+                    <span class="snack-badge"></span>
+                    <img src="<%= snack.image %>" alt="<%= snack.title %>">
+                    <h4><%= snack.title %></h4>
+                    <p>₹<%= snack.price %></p>
+                    <p><%= snack.description %></p>
+                    <button>Add to Cart</button>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <p>No snacks available at the moment.</p>
+              <% } %>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 Snack Bazaar</p>
+        </div>
+      </footer>
+    </body>
+    </html>

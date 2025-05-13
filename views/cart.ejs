@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Cart - Snack Bazaar</title>
+      <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+      <header>
+        <div class="container">
+          <div class="logo">Snack Bazaar</div>
+          <nav>
+            <ul>
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/dashboard/products">Products</a></li>
+              <li><a href="/dashboard/track-order">Track Order</a></li>
+              <li><a href="/dashboard/contact-us">Contact Us</a></li>
+              <li><a href="/dashboard/profile">Profile</a></li>
+              <li><a href="/dashboard/order-history">Order History</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="cart">
+          <div class="container">
+            <h2>Your Cart</h2>
+            <% if (cart && cart.items.length > 0) { %>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% cart.items.forEach(item => { %>
+                    <tr>
+                      <td><%= item.snackId.title %></td>
+                      <td>₹<%= item.snackId.price %></td>
+                      <td>
+                        <form action="/cart/update/<%= item.snackId._id %>" method="POST">
+                          <input type="number" name="quantity" value="<%= item.quantity %>" min="1" style="width: 50px;">
+                          <button type="submit">Update</button>
+                        </form>
+                      </td>
+                      <td>₹<%= item.snackId.price * item.quantity %></td>
+                      <td>
+                        <form action="/cart/remove/<%= item.snackId._id %>" method="POST">
+                          <button type="submit">Remove</button>
+                        </form>
+                      </td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+              <p><b>Total:</b> ₹<%= cart.totalPrice %></p>
+              <form action="/order/place" method="POST">
+                <button type="submit">Place Order</button>
+              </form>
+            <% } else { %>
+              <p>Your cart is empty.</p>
+            <% } %>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 Snack Bazaar</p>
+        </div>
+      </footer>
+    </body>
+    </html>
